@@ -13,6 +13,4 @@ public class RespuestaApi {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
 }

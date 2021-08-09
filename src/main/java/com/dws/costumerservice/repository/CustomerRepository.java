@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.dws.costumerservice.dto.Customer;
-import com.dws.costumerservice.dto.Region;
 import com.dws.costumerservice.dto.RespuestaApi;
 
 @Repository
@@ -34,12 +33,7 @@ public class CustomerRepository {
 				customer.setApellidos(rs.getString(3));
 				customer.setRfc(rs.getString(4));
 				customer.setCorreo(rs.getString(5));
-				
-				Region region = new Region();
-				region.setId(rs.getInt(7));
-				region.setRegion(rs.getString(8));
-				
-				customer.setRegion(region);
+				customer.setId_region(rs.getInt(6));
 				
 				return customer; 
 			}
@@ -62,16 +56,10 @@ public class CustomerRepository {
 				customer.setApellidos(rs.getString(3));
 				customer.setRfc(rs.getString(4));
 				customer.setCorreo(rs.getString(5));
-				
-				Region region = new Region();
-				region.setId(rs.getInt(7));
-				region.setRegion(rs.getString(8));
-				
-				customer.setRegion(region);
+				customer.setId_region(rs.getInt(6));
 				
 				return customer; 
 			}
-
 		});
 		return customer;
 	}
@@ -82,7 +70,7 @@ public class CustomerRepository {
 				+ "'" + customer.getApellidos() + "',"
 				+ "'" + customer.getRfc() + "',"
 				+ "'" + customer.getCorreo() + "',"
-				+ customer.getRegion().getId() + ");";
+				+ customer.getId_region() + ");";
 		
 		jdbctemplate.update(consulta);
 		
@@ -98,7 +86,7 @@ public class CustomerRepository {
 				+ "apellidos = '" + customer.getApellidos() + "',"
 				+ "rfc = '" + customer.getRfc() + "',"
 				+ "correo = '" + customer.getCorreo() + "',"
-				+ "id_region = " + customer.getRegion().getId() + " "
+				+ "id_region = " + customer.getId_region() + " "
 				+ "WHERE id = " + id +";";
 		
 		jdbctemplate.update(consulta);
